@@ -1,0 +1,17 @@
+school=# SELECT * FROM classes;
+school=# SELECT name, credits FROM classes WHERE credits > 3;
+school=# SELECT * FROM classes WHERE credits % 2 = 0;
+school=# SELECT * FROM students INNER JOIN enrollments ON students.id = enrollments.student_id WHERE students.id = 1 AND enrollments.grade IS NULL;
+school=# SELECT * FROM students INNER JOIN enrollments ON students.id = enrollments.student_id WHERE students.first_name = 'Tianna' AND enrollments.grade IS NULL;
+school=# SELECT students.id,students.first_name,students.last_name,enrollments.class_id,enrollments.grade,classes.name FROM students INNER JOIN enrollments ON students.id = enrollments.student_id JOIN classes ON enrollments.class_id = classes.id WHERE students.first_name = 'Tianna' AND enrollments.grade IS NULL;
+school=# SELECT * FROM students WHERE EXTRACT(YEAR FROM students.birthdate) < '1986' AND LOWER(first_name) LIKE '%t%' OR LOWER(last_name) LIKE '%t%';
+school=# SELECT AVG (age(birthdate)) FROM students;
+school=# SELECT * FROM addresses WHERE city LIKE '% %';
+school=# SELECT students.first_name,addresses.line_1,addresses.city,addresses.state,addresses.zipcode FROM students INNER JOIN addresses ON students.address_id = addresses.id WHERE addresses.city LIKE '% %';
+school=# SELECT AVG (credits) FROM classes;
+school=# SELECT students.first_name, students.last_name FROM students INNER JOIN enrollments ON students.id = enrollments.student_id WHERE enrollments.grade = 'A' ;
+school=# SELECT students.first_name,SUM(credits)total_credits FROM students INNER JOIN enrollments ON students.id = enrollments.student_id JOIN classes ON enrollments.class_id = classes.id GROUP BY students.first_name;
+school=# SELECT students.first_name,SUM(credits)total_credits FROM students INNER JOIN enrollments ON students.id = enrollments.student_id JOIN classes ON enrollments.class_id = classes.id WHERE enrollments.grade IS NOT NULL GROUP BY students.first_name;
+school=# SELECT * FROM enrollments INNER JOIN classes ON enrollments.class_id = classes.id;
+school=# SELECT * FROM students WHERE EXTRACT(YEAR FROM birthdate) BETWEEN 1982 AND 1985;
+school=# INSERT INTO enrollments (student_id, class_id, grade) VALUES (5, 4, 'A');
